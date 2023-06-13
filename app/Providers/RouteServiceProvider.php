@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -38,12 +39,12 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('site')
-                ->prefix('site')  
+            Route::middleware(['localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'site'])
+                ->prefix(LaravelLocalization::setLocale().'/'.'site')  
                 ->group(base_path('routes/site.php'));
 
-            Route::middleware('admin')
-                ->prefix('admin')
+            Route::middleware(['admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ])
+                ->prefix(LaravelLocalization::setLocale().'/'.'admin')
                 ->group(base_path('routes/admin.php'));
         });
     }
