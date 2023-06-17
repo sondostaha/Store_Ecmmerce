@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboard\DashboardController;
+use App\Http\Controllers\AdminDashboard\ProfileControll;
 use App\Http\Controllers\AdminDashboard\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,23 @@ Route::get('/login', function () {
 Route::group(['middleware'=> 'auth:admin'], function(){
     Route::get('/',[DashboardController::class ,'index'] )->middleware(['auth:admin', 'verified'])->name('dashboard');
 
-    //setting shipping
-    Route::get('shipping/{type}',[SettingController::class ,'shipping'])->name('edit.shipping');
-    //update shipping
-    Route::post('update/shaping/{id}' ,[SettingController::class , 'shippingUpdate'])->name('update.shipping');
+    Route::prefix('profile')->group(function(){
+
+        Route::get('edit',[ProfileControll::class,'edit'])->name('edit.profile');
+        Route::post('update',[ProfileControll::class ,'update'])->name('update.profile');
+
+    });
+    //setting 
+    Route::prefix('setting')->group(function(){
+        //shipping
+        Route::get('shipping/{type}',[SettingController::class ,'shipping'])->name('edit.shipping');
+        //update shipping
+        Route::post('update/shaping/{id}' ,[SettingController::class , 'shippingUpdate'])->name('update.shipping');
+
+    });
+
+
+   
 });
 
 require __DIR__.'/admin_auth.php';

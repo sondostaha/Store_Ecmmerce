@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShippingRequest;
 use App\Models\Setting;
+use Exception;
 use Faker\Extension\Extension;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,7 +44,7 @@ class SettingController extends Controller
             $shipping->save();
             DB::commit();
             return back()->with(['success'=> 'تم التعديل بنجاح']);
-        }catch(Extension $ex){
+        }catch(Exception $ex){
 
             DB::rollBack();
             return back()->with(['error'=> 'هناك خطاء ما']);
