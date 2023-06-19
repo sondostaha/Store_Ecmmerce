@@ -57,7 +57,7 @@
 
 
   --}}
-           @can('brands')
+          
             <li class="nav-item"><a href=""><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> الماركات التجارية  </span>
                     <span
@@ -67,12 +67,11 @@
                     <li class="active"><a class="menu-item" href="{{route('admin.brands')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.brands.create')}}" data-i18n="nav.dash.crypto">أضافة
+                    <li><a class="menu-item" href="{{route('admin.create.brands')}}" data-i18n="nav.dash.crypto">أضافة
                             ماركة جديده </a>
                     </li>
                 </ul>
             </li>
-            @endcan
 
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>

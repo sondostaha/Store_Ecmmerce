@@ -54,17 +54,7 @@ Route::group(['middleware'=> 'auth:admin'], function(){
 
     });
 
-    //sub categories
-    Route::prefix('subcategories')->group(function(){
-        
-        Route::get('/',[SubCategoryController::class ,'index'])->name('admin.subcategories');
-        Route::get('add',[SubCategoryController::class ,'create'])->name('admin.create.subcategories');
-        Route::post('store',[SubCategoryController::class ,'store'])->name('admin.store.subcategories');
-        Route::get('edit/{id}',[SubCategoryController::class ,'edit'])->name('admin.edit.subcategories');
-        Route::post('update/{id}',[SubCategoryController::class ,'update'])->name('admin.update.subcategories');
-        Route::get('delete/{id}',[SubCategoryController::class ,'delete'])->name('admin.delete.subcategories');
 
-    });
 
      // brands
      Route::prefix('brands')->group(function(){
