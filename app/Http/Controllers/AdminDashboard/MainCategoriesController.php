@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Enumerations\Type;
 use App\Http\Requests\MainCategoryRequest;
 
 class MainCategoriesController extends Controller
@@ -28,7 +29,7 @@ class MainCategoriesController extends Controller
     {
         try{
             
-            if($request->type == 1)
+            if($request->type == Type::mainCategory)
             {
                 $request->request->add(['parent_id' => null]) ;
             }
