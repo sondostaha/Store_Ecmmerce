@@ -95,7 +95,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-{{-- 
+
                                                 <div class="row hidden" id="cats_list" >
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -105,8 +105,10 @@
                                                                 <optgroup label="من فضلك أختر القسم ">
                                                                     @if($categories && $categories -> count() > 0)
                                                                         @foreach($categories as $category)
-                                                                            <option
-                                                                                value="{{$category -> id }}">{{$category -> name}}</option>
+
+                                                                            <option value="{{$category -> id }}">{{$category -> name}}</option>
+                                                                            <option value="{{$category -> id }}">--{{$category -> _parent -> name  ?? $category->name}}</option>
+
                                                                         @endforeach
                                                                     @endif
                                                                 </optgroup>
@@ -117,7 +119,7 @@
 
                                                         </div>
                                                     </div>
-                                                </div> --}}
+                                                </div>
 
                                                 <div class="row">
                                                     <div class="col-md-6">

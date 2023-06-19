@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminDashboard\BrandsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminDashboard\TagsController;
 use App\Http\Controllers\AdminDashboard\ProfileControll;
+use App\Http\Controllers\AdminDashboard\BrandsController;
 use App\Http\Controllers\AdminDashboard\SettingController;
 use App\Http\Controllers\AdminDashboard\DashboardController;
 use App\Http\Controllers\AdminDashboard\SubCategoryController;
@@ -74,6 +75,18 @@ Route::group(['middleware'=> 'auth:admin'], function(){
         Route::get('edit/{id}',[BrandsController::class ,'edit'])->name('admin.edit.brands');
         Route::post('update/{id}',[BrandsController::class ,'update'])->name('admin.update.brands');
         Route::get('delete/{id}',[BrandsController::class ,'delete'])->name('admin.delete.brands');
+
+    });
+
+     // brands
+     Route::prefix('tags')->group(function(){
+        
+        Route::get('/',[TagsController::class ,'index'])->name('admin.tags');
+        Route::get('add',[TagsController::class ,'create'])->name('admin.create.tags');
+        Route::post('store',[TagsController::class ,'store'])->name('admin.store.tags');
+        Route::get('edit/{id}',[TagsController::class ,'edit'])->name('admin.edit.tags');
+        Route::post('update/{id}',[TagsController::class ,'update'])->name('admin.update.tags');
+        Route::get('delete/{id}',[TagsController::class ,'delete'])->name('admin.delete.tags');
 
     });
 

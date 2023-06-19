@@ -13,24 +13,28 @@ class MainCategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::Parent()->paginate(PAGINATION_COUNT) ;
+        $categories = Category::paginate(PAGINATION_COUNT) ;
 
         return view('admin.categories.index',compact('categories'));
     }
 
     public function create()
     {
-        return view('admin.categories.create');
+        $categories = Category::all() ;
+
+        return view('admin.categories.create',compact('categories'));
     }
-    public function store(Request $request)
+    public function store(MainCategoryRequest $request)
     {
         try{
-            $request->validate([
-                'name' => 'required|max:50',
-                'slug' => 'required|unique:categories,slug,'.$request->id
-            ]);
+            
+            if($request->type == 1)
+            {
+                $request->request->add(['parent_id' => null]) ;
+            }
             // dd($request->all());
             $category = Category::create([
+                'parent_id' => $request->parent_id,
                 'name' => $request->name,
                 'slug' => $request->slug,
                 'is_active' => $request->is_active
@@ -39,7 +43,7 @@ class MainCategoriesController extends Controller
             $category->name = $request->name ;
             $category->save();
             
-           return redirect()->route('admin.categories')->with('success','تم الحذف بنجاح');
+           return redirect()->route('admin.categories')->with('success','تم الاضافه بنجاح');
 
         }catch(Exception $ex)
         {
