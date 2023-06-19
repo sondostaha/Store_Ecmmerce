@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboard\BrandsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboard\ProfileControll;
 use App\Http\Controllers\AdminDashboard\SettingController;
@@ -61,6 +62,18 @@ Route::group(['middleware'=> 'auth:admin'], function(){
         Route::get('edit/{id}',[SubCategoryController::class ,'edit'])->name('admin.edit.subcategories');
         Route::post('update/{id}',[SubCategoryController::class ,'update'])->name('admin.update.subcategories');
         Route::get('delete/{id}',[SubCategoryController::class ,'delete'])->name('admin.delete.subcategories');
+
+    });
+
+     // brands
+     Route::prefix('brands')->group(function(){
+        
+        Route::get('/',[BrandsController::class ,'index'])->name('admin.brands');
+        Route::get('add',[BrandsController::class ,'create'])->name('admin.create.brands');
+        Route::post('store',[BrandsController::class ,'store'])->name('admin.store.brands');
+        Route::get('edit/{id}',[BrandsController::class ,'edit'])->name('admin.edit.brands');
+        Route::post('update/{id}',[BrandsController::class ,'update'])->name('admin.update.brands');
+        Route::get('delete/{id}',[BrandsController::class ,'delete'])->name('admin.delete.brands');
 
     });
 
