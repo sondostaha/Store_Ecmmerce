@@ -1,5 +1,5 @@
 <?php 
-// namespace App\Helpers ;
+define('PAGINATION_COUNT',10);
 use Illuminate\Support\Facades\App;
 
 function getlocale()

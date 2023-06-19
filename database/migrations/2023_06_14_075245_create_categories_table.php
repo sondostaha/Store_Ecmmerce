@@ -14,12 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->string('slug');
+            $table->increments('id');
+            $table->unsignedInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->string('slug')->unique();
             $table->boolean('is_active');
             $table->timestamps();
         });
+
+        // Schema::table('categories', function($table) {
+        //     $table->foreign('parent_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
+        // });
     }
 
     /**

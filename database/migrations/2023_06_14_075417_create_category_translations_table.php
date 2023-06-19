@@ -15,10 +15,16 @@ return new class extends Migration
     {
         Schema::create('category_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->unsignedInteger('category_id');
+       
             $table->string('locale');
             $table->string('name');
+            $table->unique(['category_id','locale']);
             $table->timestamps();
+        });
+
+        Schema::table('category_translations', function($table) {
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 
