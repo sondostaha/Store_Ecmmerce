@@ -111,7 +111,7 @@ class ProductController extends Controller
     {
         try{
             DB::beginTransaction();
-            dd($request->all());
+            // dd($request->all());
 
             Product::where('id',$request->product_id)->update([
                 'price'  => $request->price , 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboard\AttributeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboard\TagsController;
 use App\Http\Controllers\AdminDashboard\ProfileControll;
@@ -102,7 +103,16 @@ Route::group(['middleware'=> 'auth:admin'], function(){
         Route::get('delete/{id}',[ProductController::class ,'delete'])->name('admin.delete.general.products');
 
     });
+    Route::prefix('attributes')->group(function(){
+        
+        Route::get('/',[AttributeController::class ,'index'])->name('admin.attribute');
+        Route::get('add',[AttributeController::class ,'create'])->name('admin.create.attribute');
+        Route::post('store',[AttributeController::class ,'store'])->name('admin.store.attribute');
+        Route::get('edit/{id}',[AttributeController::class ,'edit'])->name('admin.edit.attribute');
+        Route::post('update/{id}',[AttributeController::class ,'update'])->name('admin.update.attribute');
+        Route::get('delete/{id}',[AttributeController::class ,'delete'])->name('admin.delete.attribute');
 
+    });
    
 });
 
