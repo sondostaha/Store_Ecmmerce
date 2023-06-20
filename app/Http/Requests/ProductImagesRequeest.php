@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ProductStockRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductStockRequeest extends FormRequest
+class ProductImagesRequeest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,9 @@ class ProductStockRequeest extends FormRequest
     public function rules()
     {
         return [
-            'sku' => 'required|min:3|max:50',
             'product_id' => 'required',
-            'manage_stock' => 'required|in:0,1',
-            'in_stock' => 'required|in:0,1',
-            'qty' => (new ProductStockRule($this->manage_stock))
-        ];  
+            'document' => 'required|array|min:1',
+            'document.*' => 'required|string'
+        ];
     }
 }

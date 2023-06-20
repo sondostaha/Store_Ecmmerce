@@ -8,10 +8,12 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GeneralProductRequeest;
+use App\Http\Requests\ProductImagesRequeest;
 use App\Http\Requests\ProductPriceRequest;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
@@ -144,7 +146,51 @@ class ProductController extends Controller
                 'in_stock' => $request->in_stock ,
                 'qty' => $request->qty ,
             ]);
+            DB::commit();
            return redirect()->route('admin.general.products')->with('success','تم الاضافه بنجاح');
+
+        }catch(Exception $ex)
+        {
+            DB::rollBack();
+
+            return redirect()->back()->with('error','حدث خطا ما');
+
+        }
+    }
+
+    public function getImages($product_id)
+    {
+        return view('admin.products.image.create',compact('product_id'));
+    }
+
+    public function saveImage(Request $request)
+    {
+        if($request->hasFile('dzfile'))
+        {
+            $file = $request->file('dzfile');
+            $file_name = getImage('products',$request->dzfile);
+        }   
+        return response()->json([
+            'name' => $file_name ,
+            'origine_name' => $file->getClientOriginalName(),
+        ]);
+    }
+    public function storeImage(ProductImagesRequeest $request)
+    {
+        try{
+            DB::beginTransaction();
+            if($request->has('document') && count($request->document) > 0)
+            {
+                foreach($request->document as $photo)
+                {
+                    ProductImage::create([
+                        'product_id' => $request->product_id,
+                        'photo' => $photo
+                    ]);
+                }
+            }
+            DB::commit();
+            return redirect()->route('admin.general.products')->with('success','تم الاضافه بنجاح');
 
         }catch(Exception $ex)
         {

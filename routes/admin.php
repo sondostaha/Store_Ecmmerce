@@ -94,6 +94,11 @@ Route::group(['middleware'=> 'auth:admin'], function(){
         Route::get('stock/{id}',[ProductController::class ,'getStock'])->name('admin.stock.create.products');
         Route::post('store/stock',[ProductController::class ,'storestock'])->name('admin.store.stock.products');
 
+        Route::get('images/{id}',[ProductController::class ,'getImages'])->name('admin.image.create.products');
+        Route::post('store/image',[ProductController::class ,'storeImage'])->name('admin.store.image.products');
+        Route::post('save/image',[ProductController::class ,'saveImage'])->name('admin.save.image.products');
+
+
         Route::get('delete/{id}',[ProductController::class ,'delete'])->name('admin.delete.general.products');
 
     });
