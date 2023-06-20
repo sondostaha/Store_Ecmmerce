@@ -73,4 +73,9 @@ class Category extends Model
         return $this -> belongsToMany(Product::class,'product_categories');
     }
 
+    public function scopActive($query)
+    {
+        return $query->where('is_active',1);
+    }
+
 }

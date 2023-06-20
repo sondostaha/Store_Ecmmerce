@@ -28,8 +28,8 @@ return new class extends Migration
             $table->boolean('in_stock');
             $table->integer('viewed')->unsigned()->default(0);
             $table->boolean('is_active');
-            $table->integer('brand_id')->unsigned()->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
+         
+            $table->foreignId('brand_id')->constrained('brands')->cascadeOnDeleteca();
             $table->softDeletes();
             $table->timestamps();
         });
