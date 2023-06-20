@@ -82,13 +82,18 @@ Route::group(['middleware'=> 'auth:admin'], function(){
     });
 
        // brands
-       Route::prefix('generalProducts')->group(function(){
+       Route::prefix('Products')->group(function(){
         
         Route::get('/',[ProductController::class ,'index'])->name('admin.general.products');
         Route::get('add',[ProductController::class ,'create'])->name('admin.create.general.products');
         Route::post('store',[ProductController::class ,'store'])->name('admin.store.general.products');
-        Route::get('edit/{id}',[ProductController::class ,'edit'])->name('admin.edit.general.products');
-        Route::post('update/{id}',[ProductController::class ,'update'])->name('admin.update.general.products');
+
+        Route::get('price/{id}',[ProductController::class ,'getPrice'])->name('admin.price.create.products');
+        Route::post('store/price',[ProductController::class ,'storeprice'])->name('admin.store.price.products');
+
+        Route::get('stock/{id}',[ProductController::class ,'getStock'])->name('admin.stock.create.products');
+        Route::post('store/stock',[ProductController::class ,'storestock'])->name('admin.store.stock.products');
+
         Route::get('delete/{id}',[ProductController::class ,'delete'])->name('admin.delete.general.products');
 
     });

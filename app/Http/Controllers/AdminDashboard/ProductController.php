@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\AdminDashboard;
 
+use App\Http\Requests\ProductStockRequeest;
 use Exception;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GeneralProductRequeest;
+use App\Http\Requests\ProductPriceRequest;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -95,6 +97,59 @@ class ProductController extends Controller
 
         }catch(Exception $ex)
         {
+            return redirect()->back()->with('error','حدث خطا ما');
+
+        }
+    }
+    public function getPrice($product_id)
+    {
+        return view('admin.products.price.create',compact('product_id'));
+    }
+    public function storeprice(ProductPriceRequest $request )
+    {
+        try{
+            DB::beginTransaction();
+            dd($request->all());
+
+            Product::where('id',$request->product_id)->update([
+                'price'  => $request->price , 
+                'special_price'  => $request->special_price ,
+                'special_price_type' => $request->special_price_type ,
+                'special_price_start' => $request->special_price_start ,
+                'special_price_end' => $request->special_price_end ,
+            ]);
+           return redirect()->route('admin.general.products')->with('success','تم الاضافه بنجاح');
+
+        }catch(Exception $ex)
+        {
+            DB::rollBack();
+
+            return redirect()->back()->with('error','حدث خطا ما');
+
+        }
+    }
+    public function getStock($product_id)
+    {
+        return view('admin.products.stock.create',compact('product_id'));
+    }
+    public function storeStock(ProductStockRequeest $request)
+    {
+        try{
+            DB::beginTransaction();
+            // dd($request->all());
+
+            Product::where('id',$request->product_id)->update([
+                'sku'  => $request->sku , 
+                'manage_stock'  => $request->manage_stock ,
+                'in_stock' => $request->in_stock ,
+                'qty' => $request->qty ,
+            ]);
+           return redirect()->route('admin.general.products')->with('success','تم الاضافه بنجاح');
+
+        }catch(Exception $ex)
+        {
+            DB::rollBack();
+
             return redirect()->back()->with('error','حدث خطا ما');
 
         }
