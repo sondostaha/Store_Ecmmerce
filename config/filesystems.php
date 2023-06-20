@@ -43,6 +43,21 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'brands' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/brands'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'products' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/products'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
