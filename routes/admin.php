@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminDashboard\SettingController;
 use App\Http\Controllers\AdminDashboard\DashboardController;
 use App\Http\Controllers\AdminDashboard\SubCategoryController;
 use App\Http\Controllers\AdminDashboard\MainCategoriesController;
+use App\Http\Controllers\AdminDashboard\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,18 @@ Route::group(['middleware'=> 'auth:admin'], function(){
         Route::get('edit/{id}',[TagsController::class ,'edit'])->name('admin.edit.tags');
         Route::post('update/{id}',[TagsController::class ,'update'])->name('admin.update.tags');
         Route::get('delete/{id}',[TagsController::class ,'delete'])->name('admin.delete.tags');
+
+    });
+
+       // brands
+       Route::prefix('generalProducts')->group(function(){
+        
+        Route::get('/',[ProductController::class ,'index'])->name('admin.general.products');
+        Route::get('add',[ProductController::class ,'create'])->name('admin.create.general.products');
+        Route::post('store',[ProductController::class ,'store'])->name('admin.store.general.products');
+        Route::get('edit/{id}',[ProductController::class ,'edit'])->name('admin.edit.general.products');
+        Route::post('update/{id}',[ProductController::class ,'update'])->name('admin.update.general.products');
+        Route::get('delete/{id}',[ProductController::class ,'delete'])->name('admin.delete.general.products');
 
     });
 

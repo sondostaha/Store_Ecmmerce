@@ -64,4 +64,9 @@ class Product extends Model
         return $this->belongsToMany(Tag::class ,ProductTags::class);
     }
 
+    public function getActive()
+    {
+        return $this->is_active == 1 ? 'مفعل' : 'غير مفعل' ;
+    }
+
 }

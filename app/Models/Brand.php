@@ -29,8 +29,9 @@ class Brand extends Model
         return  asset('assets/images/brands/'. $this->photo) ; 
     }
 
-    public function scopActive($query)
-    {
-        return $query->where('is_active',1);
+
+    public function scopeActive($query){
+        return $query -> where('is_active',1) ;
     }
+
 }

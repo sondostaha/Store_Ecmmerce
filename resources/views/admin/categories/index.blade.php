@@ -87,9 +87,7 @@
 
                                             </tbody>
                                         </table>
-                                        <div class="justify-content-center d-flex">
-
-                                        </div>
+                                        {!! $categories -> links() !!}
                                     </div>
                                 </div>
                             </div>
