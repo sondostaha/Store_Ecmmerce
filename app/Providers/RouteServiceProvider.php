@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/home';
     public const ADMIN = '/admin';
 
 
@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             Route::middleware(['localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'site'])
-                ->prefix(LaravelLocalization::setLocale().'/'.'site')  
+                ->prefix(LaravelLocalization::setLocale())  
                 ->group(base_path('routes/site.php'));
 
             Route::middleware(['admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ])
