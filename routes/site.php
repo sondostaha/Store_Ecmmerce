@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\site\VerificationCodeController;
 use Illuminate\Support\Facades\Route;
 
 // /*
@@ -20,6 +21,11 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('front.home');
-})->middleware(['auth', 'verified'])->name('home');
+})->middleware(['auth', 'verifiyCode'])->name('home');
+
+Route::group(['middleware' => 'auth'],function(){
+    Route::get('/verify',[VerificationCodeController::class , 'verifyPage']);
+    Route::post('vrefiy/user',[VerificationCodeController::class ,'verify'])->name('verify.user');
+});
 
 require __DIR__.'/auth.php';

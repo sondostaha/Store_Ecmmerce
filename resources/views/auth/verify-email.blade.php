@@ -1,31 +1,75 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
+@extends('layouts.site')
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
+@section('content')
+    <nav data-depth="1" class="breadcrumb-bg">
+        <div class="container no-index">
+            <div class="breadcrumb">
 
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
+                <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" href="{{route('home')}}">
+                            <span itemprop="name">Home</span>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </li>
+                </ol>
             </div>
-        </form>
+        </div>
+    </nav>
+    <div class="container no-index">
+        <div class="row">
+            <div id="content-wrapper" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="main">
+                    <div class="page-header">
+                        <h1 class="page-title hidden-xs-up">
+                           please Enter the code we sent to your mobile
+                        </h1>
+                    </div>
+                    <section id="content" class="page-content">
+                        <section class="login-form">
+                            <form method="POST" action="{{route('verify.user')}}">
+                                @csrf
+                                <section>
+                                    <div class="form-group row no-gutters">
+                                        <label class="col-md-2 form-control-label mb-xs-5 required">
+                                            Verification Code :
+                                        </label>
+                                        <div class="col-md-6">
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
+                                            <input class="form-control" name="code" value=""
+                                                   type="text" >
+                                            @error('code')
+                                            <span  class="invalid-feedback text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 form-control-comment right">
+                                        </div>
+                                    </div>
 
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
-            </button>
-        </form>
+                                </section>
+                                <footer class="form-footer clearfix">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-10 offset-md-2">
+                                            <input type="hidden" name="submitLogin" value="1">
+                                            <button class="btn btn-primary" data-link-action="sign-in" type="submit"
+                                                    class="form-control-submit">
+                                               Confirm
+                                            </button>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </form>
+                        </section>
+
+                    </section>
+                    <footer class="page-footer">
+                        <!-- Footer content -->
+                    </footer>
+                </div>
+            </div>
+        </div>
     </div>
-</x-guest-layout>
+    <br>
+@stop
