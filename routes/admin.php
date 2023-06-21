@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminDashboard\SettingController;
 use App\Http\Controllers\AdminDashboard\DashboardController;
 use App\Http\Controllers\AdminDashboard\SubCategoryController;
 use App\Http\Controllers\AdminDashboard\MainCategoriesController;
+use App\Http\Controllers\AdminDashboard\OptionControl;
 use App\Http\Controllers\AdminDashboard\ProductController;
 
 /*
@@ -35,7 +36,9 @@ Route::group(['middleware'=> 'auth:admin'], function(){
         Route::post('update',[ProfileControll::class ,'update'])->name('update.profile');
 
     });
-    //setting 
+
+    ####################################### setting  ####################################################
+
     Route::prefix('setting')->group(function(){
         //shipping
         Route::get('shipping/{type}',[SettingController::class ,'shipping'])->name('edit.shipping');
@@ -44,7 +47,8 @@ Route::group(['middleware'=> 'auth:admin'], function(){
 
     });
 
-    //categories
+    ####################################### categories ####################################################
+
     Route::prefix('mainCategories')->group(function(){
         
         Route::get('/',[MainCategoriesController::class ,'index'])->name('admin.categories');
@@ -57,8 +61,8 @@ Route::group(['middleware'=> 'auth:admin'], function(){
     });
 
 
+    ####################################### brands ####################################################
 
-     // brands
      Route::prefix('brands')->group(function(){
         
         Route::get('/',[BrandsController::class ,'index'])->name('admin.brands');
@@ -70,7 +74,9 @@ Route::group(['middleware'=> 'auth:admin'], function(){
 
     });
 
-     // brands
+    ####################################### tags ####################################################
+
+
      Route::prefix('tags')->group(function(){
         
         Route::get('/',[TagsController::class ,'index'])->name('admin.tags');
@@ -82,7 +88,8 @@ Route::group(['middleware'=> 'auth:admin'], function(){
 
     });
 
-       // brands
+    ####################################### products ####################################################
+
        Route::prefix('Products')->group(function(){
         
         Route::get('/',[ProductController::class ,'index'])->name('admin.general.products');
@@ -102,17 +109,35 @@ Route::group(['middleware'=> 'auth:admin'], function(){
 
         Route::get('delete/{id}',[ProductController::class ,'delete'])->name('admin.delete.general.products');
 
-    });
-    Route::prefix('attributes')->group(function(){
-        
-        Route::get('/',[AttributeController::class ,'index'])->name('admin.attribute');
-        Route::get('add',[AttributeController::class ,'create'])->name('admin.create.attribute');
-        Route::post('store',[AttributeController::class ,'store'])->name('admin.store.attribute');
-        Route::get('edit/{id}',[AttributeController::class ,'edit'])->name('admin.edit.attribute');
-        Route::post('update/{id}',[AttributeController::class ,'update'])->name('admin.update.attribute');
-        Route::get('delete/{id}',[AttributeController::class ,'delete'])->name('admin.delete.attribute');
+            ####################################### attributes ####################################################
+
+        Route::prefix('attributes')->group(function(){
+            
+            Route::get('/',[AttributeController::class ,'index'])->name('admin.attribute');
+            Route::get('add',[AttributeController::class ,'create'])->name('admin.create.attribute');
+            Route::post('store',[AttributeController::class ,'store'])->name('admin.store.attribute');
+            Route::get('edit/{id}',[AttributeController::class ,'edit'])->name('admin.edit.attribute');
+            Route::post('update/{id}',[AttributeController::class ,'update'])->name('admin.update.attribute');
+            Route::get('delete/{id}',[AttributeController::class ,'delete'])->name('admin.delete.attribute');
+
+        });
+
+            ####################################### attributes ####################################################
+
+        Route::prefix('options')->group(function(){
+            
+            Route::get('/',[OptionControl::class ,'index'])->name('admin.options');
+            Route::get('add',[OptionControl::class ,'create'])->name('admin.create.options');
+            Route::post('store',[OptionControl::class ,'store'])->name('admin.store.options');
+            Route::get('edit/{id}',[OptionControl::class ,'edit'])->name('admin.edit.options');
+            Route::post('update/{id}',[OptionControl::class ,'update'])->name('admin.update.options');
+            Route::get('delete/{id}',[OptionControl::class ,'delete'])->name('admin.delete.options');
+
+        });
 
     });
+
+
    
 });
 
