@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\site\VerificationCodeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/home', function () {
-    return view('front.home');
-})->middleware(['auth', 'verifiyCode'])->name('home');
+Route::get('/home',[HomeController::class ,'index'])->middleware(['auth', 'verifiyCode'])->name('home');
 
 Route::group(['middleware' => 'auth'],function(){
     Route::get('/verify',[VerificationCodeController::class , 'verifyPage']);

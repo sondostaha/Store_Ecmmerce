@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminDashboard\SubCategoryController;
 use App\Http\Controllers\AdminDashboard\MainCategoriesController;
 use App\Http\Controllers\AdminDashboard\OptionControl;
 use App\Http\Controllers\AdminDashboard\ProductController;
+use App\Http\Controllers\AdminDashboard\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,7 +139,16 @@ Route::group(['middleware'=> 'auth:admin'], function(){
     });
 
 
-   
+    ####################################### SLIDER ####################################################
+
+    Route::prefix('slider')->group(function(){
+        
+        Route::get('/add',[SliderController::class ,'addImage'])->name('admin.create.slider');
+        Route::post('images',[SliderController::class ,'saveSliderImages'])->name('admin.store.slider');
+        Route::post('Image/db',[SliderController::class ,'saveSliderImagesDb'])->name('admin.store.db.slider');
+
+    });
+
 });
 
 require __DIR__.'/admin_auth.php';
