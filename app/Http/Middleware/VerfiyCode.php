@@ -18,6 +18,7 @@ class VerfiyCode
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd($request);
         if (Auth::guard()->check()) {  // if he already registered and have account
 
             if(Auth::user() -> email_verified_at == null){
