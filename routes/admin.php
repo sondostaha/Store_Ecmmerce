@@ -30,7 +30,7 @@ Route::get('/login', function () {
     return view('admin.auth.login');
 });
 
-Route::group(['middleware'=> 'auth:admin'], function(){
+Route::group(['middleware'=> ['auth:admin']], function(){
     Route::get('/',[DashboardController::class ,'index'] )->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
 
     Route::prefix('profile')->group(function(){
@@ -93,7 +93,7 @@ Route::group(['middleware'=> 'auth:admin'], function(){
 
     ####################################### products ####################################################
 
-       Route::group(['prefix' => 'Products','middleware'=> 'can:product'],function(){
+       Route::group(['prefix' => 'Products'],function(){
         
         Route::get('/',[ProductController::class ,'index'])->name('admin.general.products');
         Route::get('add',[ProductController::class ,'create'])->name('admin.create.general.products');

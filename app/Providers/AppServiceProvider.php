@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Schema::defaultStringLength(191);
+        // Schema::defaultStringLength(191);
         $this->app->bind(StorageInterface::class, function ($app) {
             return new SessionStorage('basket');
         });
