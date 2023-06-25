@@ -29,7 +29,7 @@ class ProductStockRequeest extends FormRequest
             'product_id' => 'required',
             'manage_stock' => 'required|in:0,1',
             'in_stock' => 'required|in:0,1',
-            'qty' => (new ProductStockRule($this->manage_stock))
+            // 'qty' => (new ProductStockRule($this->manage_stock))
         ];  
     }
 }

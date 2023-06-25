@@ -105,16 +105,16 @@
                 </ul>
             </li>
 
-            {{-- <li class="nav-item"><a href=""><i class="la la-male"></i>
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">خصائص المنتج  </span>
                     <span
                         class="badge badge badge-success badge-pill float-right mr-2">{{\App\Models\Option::count()}} </span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="{{route('admin.attributes')}}"
+                    <li class="active"><a class="menu-item" href="{{route('admin.attribute')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.attributes.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                    <li><a class="menu-item" href="{{route('admin.create.attribute')}}" data-i18n="nav.dash.crypto">أاضافة
                             جديدة </a>
                     </li>
                 </ul>
@@ -127,52 +127,63 @@
                     <li class="active"><a class="menu-item" href="{{route('admin.options')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.options.create')}}" data-i18n="nav.dash.crypto">أاضافة
-                            جديدة </a>
-                    </li>
-                </ul> --}}
-            </li>
-
-
-            {{-- <li class="nav-item"><a href=""><i class="la la-male"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">مستخدمي لوحه التحكم </span>
-                </a>
-                <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="{{route('admin.users.index')}}"
-                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
-                    </li>
-                    <li><a class="menu-item" href="{{route('admin.users.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                    <li><a class="menu-item" href="{{route('admin.create.options')}}" data-i18n="nav.dash.crypto">أاضافة
                             جديدة </a>
                     </li>
                 </ul>
-            </li> --}}
+            </li>
+
+
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">مستخدمي لوحه التحكم </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.user')}}"
+                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.user.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                            جديدة </a>
+                    </li>
+                </ul>
+            </li>
 
 
 
+                     <li class="nav-item"><a href=""><i class="la la-male"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">الصلاحيات  </span>
+                     </a>
+                     <ul class="menu-content">
+                            <li class="active"><a class="menu-item" href="{{route('admin.roles')}}"
+                                                 data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.roles.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                                   جديدة </a>
+                            </li>
+                     </ul>
+              </li>
 
-
-            {{-- <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
-                                                                                    data-i18n="nav.templates.main"> {{__('admin/sidebar.settings')}}</span></a>
+            <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
+                                                                                    data-i18n="nav.templates.main"> الاعدادات</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#"
-                           data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.shipping methods')}} </a>
+                           data-i18n="nav.templates.vert.main"> التوصيل </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="{{route('edit.shippings.methods','free')}}"
+                            <li><a class="menu-item" href="{{route('edit.shipping','free')}}"
                                    data-i18n="nav.templates.vert.classic_menu">توصيل مجاني </a>
                             </li>
-                            <li><a class="menu-item" href="{{route('edit.shippings.methods','inner')}}"> توصيل
+                            <li><a class="menu-item" href="{{route('edit.shipping','inner')}}"> توصيل
                                     داخلي </a>
                             </li>
-                            <li><a class="menu-item" href="{{route('edit.shippings.methods','outer')}}"
+                            <li><a class="menu-item" href="{{route('edit.shipping','outer')}}"
                                    data-i18n="nav.templates.vert.compact_menu"> توصيل خارجي </a>
                             </li>
                         </ul>
-                    </li> --}}
+                    </li>
 
-                    {{-- <li><a class="menu-item" href="#"
-                           data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.main slider')}} </a>
+                    <li><a class="menu-item" href="#"
+                           data-i18n="nav.templates.vert.main">  </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="{{route('admin.sliders.create')}}"
+                            <li><a class="menu-item" href="{{route('admin.create.slider')}}"
                                    data-i18n="nav.templates.vert.classic_menu">صور الاسليدر </a>
                             </li>
                         </ul>
@@ -180,7 +191,7 @@
 
 
                 </ul>
-            </li> --}}
+            </li>
             <li class=" navigation-header">
                 <span data-i18n="nav.category.layouts">Layouts</span><i class="la la-ellipsis-h ft-minus"
                                                                         data-toggle="tooltip"

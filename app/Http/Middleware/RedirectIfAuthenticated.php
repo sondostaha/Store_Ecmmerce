@@ -28,7 +28,7 @@ class RedirectIfAuthenticated
                 if($guard == 'admin')
                 {
                     return redirect(RouteServiceProvider::ADMIN);
-                }else
+                }elseif($guard == 'web')
                 {
                     return redirect(RouteServiceProvider::HOME);
                 }

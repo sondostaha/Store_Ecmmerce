@@ -1,52 +1,154 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.site')
+@section('content')
+    <nav data-depth="1" class="breadcrumb-bg">
+        <div class="container no-index">
+            <div class="breadcrumb">
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" href="{{route('home')}}">
+                            <span itemprop="name">Home</span>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </li>
+                </ol>
+            </div>
         </div>
+    </nav>
+    <div class="container no-index">
+        <div class="row">
+            <div id="content-wrapper" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="main">
+                    <div class="page-header">
+                        <h1 class="page-title hidden-xs-up">
+                            Log in to your account
+                        </h1>
+                    </div>
+                    <section id="content" class="page-content">
+                        <section class="login-form">
+                            <form method="POST" action="{{ route('register.user') }}">
+                                @csrf
+                                <section>
+                                    <div class="form-group row no-gutters">
+                                        <label class="col-md-2 form-control-label mb-xs-5 required">
+                                            Name :
+                                        </label>
+                                        <div class="col-md-6">
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                            <input class="form-control" name="name" value="{{ old('name') }}"
+                                                   type="text" required="">
+                                            @error('name')
+                                            <span class="invalid-feedback text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 form-control-comment right">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row no-gutters">
+                                        <label class="col-md-2 form-control-label mb-xs-5 required">
+                                            Mobile :
+                                        </label>
+                                        <div class="col-md-6">
+
+                                            <input class="form-control" name="mobile" value="{{ old('mobile') }}"
+                                                   type="text" required="">
+                                            @error('mobile')
+                                            <span class="invalid-feedback text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 form-control-comment right">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row no-gutters">
+                                        <label class="col-md-2 form-control-label mb-xs-5 required">
+                                            Password :
+                                        </label>
+                                        <div class="col-md-6">
+
+                                            <div class="input-group js-parent-focus">
+                                                <input class="form-control js-child-focus js-visible-password"
+                                                       name="password" type="password" value=""
+                                                       required="">
+                                                <span class="input-group-btn">
+                                    <button class="btn" type="button" data-action="show-password" data-text-show="Show"
+                                            data-text-hide="Hide">
+                                      Show
+                                    </button>
+                     </span>
+                                            </div>
+                                            @error('password')
+                                            <span class="text-danger invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 form-control-comment right">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row no-gutters">
+                                        <label class="col-md-2 form-control-label mb-xs-5 required">
+                                            confirm Password :
+                                        </label>
+                                        <div class="col-md-6">
+                                            <div class="input-group js-parent-focus">
+                                                <input class="form-control js-child-focus js-visible-password"
+                                                       name="password_confirmation" type="password" value=""
+                                                       required="">
+                                                <span class="input-group-btn">
+                                    <button class="btn" type="button" data-action="show-password" data-text-show="Show"
+                                            data-text-hide="Hide">
+                                      Show
+                                    </button>
+                     </span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 form-control-comment right">
+                                        </div>
+                                    </div>
+                                    <div class="row no-gutters">
+                                        <div class="col-md-10 offset-md-2">
+                                            <div class="forgot-password">
+                                                <a href="password-recovery.html" rel="nofollow">
+                                                    Forgot your password?
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <footer class="form-footer clearfix">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-10 offset-md-2">
+                                            <input type="hidden" name="submitLogin" value="1">
+                                            <button class="btn btn-primary" data-link-action="sign-in" type="submit"
+                                                    class="form-control-submit">
+                                                Sign up
+                                            </button>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </form>
+                        </section>
+                        <div class="row no-gutters">
+                            <div class="col-md-10 offset-md-2">
+                                <div class="no-account">
+                                    <a href="{{route('login')}}" data-link-action="display-register-form">
+                                        Have account? Login Here
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="page-footer">
+                        <!-- Footer content -->
+                    </footer>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+    <br>
+@stop

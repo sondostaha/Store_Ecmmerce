@@ -1,7 +1,14 @@
 <?php
 
-// use App\Http\Controllers\ProfileController;
-// use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Site\CartController;
+use App\Http\Controllers\Site\CategoryController;
+use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\PaymentController;
+use App\Http\Controllers\Site\RolesController;
+use App\Http\Controllers\site\VerificationCodeController;
+use App\Http\Controllers\Site\WishlistController;
+use Illuminate\Support\Facades\Route;
 
 // /*
 // |--------------------------------------------------------------------------
@@ -14,18 +21,40 @@
 // |
 // */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
+Route::group(['middleware' => [ 'auth', 'verifiyCode' ]],function(){
+    Route::get('/home',[HomeController::class ,'index'])->name('home');
+    //categories 
+    Route::get('categories,{slug}',[CategoryController::class ,'productBySlug'])->name('category');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::group(['prefix' => 'wishlist'],function(){
+        //wishlist
+        Route::post('/',[WishlistController::class ,'store'])->name('wishlist.store');
+        Route::Delete('delete',[WishlistController::class ,'delete'])->name('wishlist.delete');
+        Route::get('/products', [WishlistController::class ,'index'])->name('wishlist.products.index');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+    });
+    
+    Route::group(['prefix' => 'cart'],function(){
 
-// require __DIR__.'/auth.php';
+        Route::get('/products', [CartController::class ,'getIndex'])->name('site.cart.index');
+        Route::post('add/{slug?}',[CartController::class ,'postAdd'])->name('site.cart.add');
+
+        Route::post('/update/{slug}', [CartController::class ,'postUpdate'])->name('site.cart.update');
+        Route::post('/update_all', [CartController::class ,'postupdateAll'])->name('site.cart.update_all');
+
+        Route::get('payment/{amount}', [PaymentController::class ,'getPayments'])->name('payments');
+        Route::post('payment' ,[PaymentController::class ,'processPayment'])->name('payment.process');
+    }); 
+
+
+});
+
+Route::group(['middleware' => 'auth'],function(){
+    Route::get('/verify',[VerificationCodeController::class , 'verifyPage']);
+    Route::post('vrefiy/user',[VerificationCodeController::class ,'verify'])->name('verify.user');
+});
+
+require __DIR__.'/auth.php';
