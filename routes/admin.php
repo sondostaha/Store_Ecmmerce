@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\AdminDashboard\AttributeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminDashboard\OptionControl;
 use App\Http\Controllers\AdminDashboard\TagsController;
 use App\Http\Controllers\AdminDashboard\ProfileControll;
+use App\Http\Controllers\AdminDashboard\RolesController;
 use App\Http\Controllers\AdminDashboard\BrandsController;
+use App\Http\Controllers\AdminDashboard\SliderController;
+use App\Http\Controllers\AdminDashboard\ProductController;
 use App\Http\Controllers\AdminDashboard\SettingController;
+use App\Http\Controllers\AdminDashboard\AttributeController;
 use App\Http\Controllers\AdminDashboard\DashboardController;
 use App\Http\Controllers\AdminDashboard\SubCategoryController;
 use App\Http\Controllers\AdminDashboard\MainCategoriesController;
-use App\Http\Controllers\AdminDashboard\OptionControl;
-use App\Http\Controllers\AdminDashboard\ProductController;
-use App\Http\Controllers\AdminDashboard\SliderController;
+use App\Http\Controllers\AdminDashboard\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +93,7 @@ Route::group(['middleware'=> 'auth:admin'], function(){
 
     ####################################### products ####################################################
 
-       Route::prefix('Products')->group(function(){
+       Route::group(['prefix' => 'Products','middleware'=> 'can:product'],function(){
         
         Route::get('/',[ProductController::class ,'index'])->name('admin.general.products');
         Route::get('add',[ProductController::class ,'create'])->name('admin.create.general.products');
@@ -148,6 +150,28 @@ Route::group(['middleware'=> 'auth:admin'], function(){
         Route::post('Image/db',[SliderController::class ,'saveSliderImagesDb'])->name('admin.store.db.slider');
 
     });
+    ####################################### Roles ####################################################
+
+    Route::group(['prefix' => 'roles' , ],function(){
+        Route::get('/', [RolesController::class ,'index'] )->name('admin.roles');
+        Route::get('add', [RolesController::class ,'create'] )->name('admin.roles.create');
+        Route::post('store', [RolesController::class ,'store'] )->name('admin.roles.store');
+        Route::get('edit/{id}', [RolesController::class ,'edit'] )->name('admin.roles.edit');
+        Route::post('update/{id}', [RolesController::class ,'update'] )->name('admin.roles.update');
+        Route::get('delete/{id}', [RolesController::class ,'delete'] )->name('admin.roles.delete');
+    });
+
+        ####################################### Roles ####################################################
+
+        Route::group(['prefix' => 'user'],function(){
+            Route::get('/', [UserController::class ,'index'] )->name('admin.user');
+            Route::get('add', [UserController::class ,'create'] )->name('admin.user.create');
+            Route::post('store', [UserController::class ,'store'] )->name('admin.user.store');
+            Route::get('edit/{id}', [UserController::class ,'edit'] )->name('admin.user.edit');
+            Route::post('update/{id}', [UserController::class ,'update'] )->name('admin.user.update');
+            Route::get('delete/{id}', [UserController::class ,'delete'] )->name('admin.user.delete');
+        });
+
 
 });
 

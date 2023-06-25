@@ -134,22 +134,33 @@
             </li>
 
 
-            {{-- <li class="nav-item"><a href=""><i class="la la-male"></i>
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">مستخدمي لوحه التحكم </span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="{{route('admin.users.index')}}"
+                    <li class="active"><a class="menu-item" href="{{route('admin.user')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.users.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                    <li><a class="menu-item" href="{{route('admin.user.create')}}" data-i18n="nav.dash.crypto">أاضافة
                             جديدة </a>
                     </li>
                 </ul>
-            </li> --}}
+            </li>
 
 
 
-
+                     <li class="nav-item"><a href=""><i class="la la-male"></i>
+                            <span class="menu-title" data-i18n="nav.dash.main">الصلاحيات  </span>
+                     </a>
+                     <ul class="menu-content">
+                            <li class="active"><a class="menu-item" href="{{route('admin.roles')}}"
+                                                 data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                            </li>
+                            <li><a class="menu-item" href="{{route('admin.roles.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                                   جديدة </a>
+                            </li>
+                     </ul>
+              </li>
 
             <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
                                                                                     data-i18n="nav.templates.main"> الاعدادات</span></a>

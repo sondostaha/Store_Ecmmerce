@@ -5,6 +5,7 @@ use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\CategoryController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\PaymentController;
+use App\Http\Controllers\Site\RolesController;
 use App\Http\Controllers\site\VerificationCodeController;
 use App\Http\Controllers\Site\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::group(['middleware' => [ 'auth', 'verifiyCode' ]],function(){
         Route::get('payment/{amount}', [PaymentController::class ,'getPayments'])->name('payments');
         Route::post('payment' ,[PaymentController::class ,'processPayment'])->name('payment.process');
     }); 
+
 
 });
 
